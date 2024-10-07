@@ -17,6 +17,8 @@ import { Input } from '../ui/input'
 import { useTheme } from 'next-themes'
 import { Button } from '../ui/button'
 
+import { Selection } from './board'
+
 enum State {
     Guessing,
     Revealed,
@@ -27,15 +29,14 @@ enum State {
 export default function Play(props: {
     colours: string[]
     letters: string[]
-    selection: string
+    selection: Selection
 }) {
     const { resolvedTheme } = useTheme()
     const [state, setState] = useState<State>(State.Guessing)
     const [colours, setColours] = useState<string[]>(props.colours)
     const [letters, setLetters] = useState<string[]>(props.letters)
-    const [selection, setSelection] = useState<string>(props.selection)
     const [piece, setPiece] = useState<PieceType>(
-        props.selection == 'edge'
+        props.selection == Selection.Edges
             ? placeholderEdgePiece
             : placeholderCornerPiece
     )
@@ -47,12 +48,12 @@ export default function Play(props: {
     const [c, setC] = useState<string>('')
 
     const getRandomPiece = () => {
-        switch (selection) {
-            case 'corner':
+        switch (props.selection) {
+            case Selection.Corners:
                 return getRandom(corners)
-            case 'edge':
+            case Selection.Edges:
                 return getRandom(edges)
-            case 'both':
+            case Selection.Both:
                 return getRandom(corners, edges)
             default:
                 return getRandom(corners)
@@ -125,7 +126,7 @@ export default function Play(props: {
 
     useEffect(() => {
         resetPiece()
-    }, [])
+    }, [props.selection])
 
     return (
         <Card className="flex flex-col w-full p-3 bg-card relative h-full">
