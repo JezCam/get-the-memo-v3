@@ -35,21 +35,21 @@ export const corners: PieceType[] = [
         ],
     },
     {
-        // Red, Green, Yellow
+        // Red, Yellow, Green
         type: 'corner',
         stickers: [
             { colour: 0, letter: 30 },
-            { colour: 3, letter: 20 },
             { colour: 2, letter: 42 },
+            { colour: 3, letter: 20 },
         ],
     },
     {
-        // Orange, Blue, Yellow
+        // Orange, Yellow, Blue
         type: 'corner',
         stickers: [
             { colour: 1, letter: 14 },
-            { colour: 4, letter: 36 },
             { colour: 2, letter: 46 },
+            { colour: 4, letter: 36 },
         ],
     },
     {
@@ -62,12 +62,12 @@ export const corners: PieceType[] = [
         ],
     },
     {
-        // Red, Blue, White
+        // Red, White, Blue
         type: 'corner',
         stickers: [
             { colour: 0, letter: 26 },
-            { colour: 4, letter: 32 },
             { colour: 5, letter: 2 },
+            { colour: 4, letter: 32 },
         ],
     },
     {
@@ -89,12 +89,12 @@ export const corners: PieceType[] = [
         ],
     },
     {
-        // Orange, Green, White
+        // Orange, White, Green
         type: 'corner',
         stickers: [
             { colour: 1, letter: 10 },
-            { colour: 3, letter: 16 },
             { colour: 5, letter: 6 },
+            { colour: 3, letter: 16 },
         ],
     },
 ]

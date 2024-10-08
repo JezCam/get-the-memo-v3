@@ -15,11 +15,11 @@ body {
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: #040405;
+        --foreground: 240 10% 2%;
         --card: 0 0% 100%;
-        --card-foreground: #09090b;
+        --card-foreground: 240 10% 4%;
         --popover: 0 0% 100%;
-        --popover-foreground: #09090b;
+        --popover-foreground: 240 10% 4%;
         --primary: 0 0% 9%;
         --primary-foreground: 0 0% 98%;
         --secondary: 0 0% 96.1%;
@@ -41,11 +41,11 @@ body {
         --radius: 0.5rem;
     }
     .dark {
-        --background: #040405;
+        --background: 240 10% 2%;
         --foreground: 0 0% 98%;
-        --card: #09090b;
+        --card: 240 10% 4%;
         --card-foreground: 0 0% 98%;
-        --popover: #09090b;
+        --popover: 240 10% 4%;
         --popover-foreground: 0 0% 98%;
         --primary: 0 0% 98%;
         --primary-foreground: 0 0% 9%;
@@ -90,7 +90,7 @@ h3 {
 }
 
 h4 {
-    @apply scroll-m-20 text-sm font-[00] tracking-tight;
+    @apply scroll-m-20 text-sm font-medium tracking-tight;
 }
 
 p {

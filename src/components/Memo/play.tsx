@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Piece from './piece'
 
 import {
@@ -42,10 +42,18 @@ export default function Play(props: {
     )
     const [pieceLetters, setPieceLetters] = useState<string[]>([])
     const [pieceColours, setPieceColours] = useState<string[]>([])
+
     // Inputs
     const [a, setA] = useState<string>('')
     const [b, setB] = useState<string>('')
     const [c, setC] = useState<string>('')
+    const aRef = useRef<HTMLInputElement>(null)
+    const bRef = useRef<HTMLInputElement>(null)
+    const cRef = useRef<HTMLInputElement>(null)
+    const [inputTextColour, setInputTextColour] = useState<string>('foreground')
+
+    // Submit
+    const submitRef = useRef<HTMLButtonElement>(null)
 
     const getRandomPiece = () => {
         switch (props.selection) {
@@ -60,43 +68,71 @@ export default function Play(props: {
         }
     }
 
-    const handleReveal = () => {
+    const setLettersIncorrect = () => {
+        setInputTextColour('var(--memoRed)')
         setState(State.Revealed)
         setA(pieceLetters[0])
         setB(pieceLetters[1])
         setC(pieceLetters[2])
     }
 
-    const handleSubmit = () => {
+    const handleReveal = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        setLettersIncorrect()
+    }
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         switch (piece.type) {
             case 'corner':
                 if (
-                    JSON.stringify([a, b, c]) === JSON.stringify(pieceLetters)
+                    JSON.stringify([a, b, c].map((l) => l.toUpperCase())) ===
+                    JSON.stringify(pieceLetters)
                 ) {
                     setState(State.Correct)
+                    setInputTextColour('var(--memoGreen)')
                 } else {
                     setState(State.Incorrect)
+                    setLettersIncorrect()
                 }
                 break
             case 'edge':
                 if (JSON.stringify([a, b]) === JSON.stringify(pieceLetters)) {
                     setState(State.Correct)
+                    setInputTextColour('var(--memoGreen)')
                 } else {
                     setState(State.Incorrect)
+                    setLettersIncorrect()
                 }
                 break
         }
     }
 
-    const handleTryAgain = () => {
+    const handleTryAgain = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        setInputTextColour('var(--foreground)')
         setState(State.Guessing)
         resetLetters()
+        aRef.current?.focus()
     }
 
-    const handleNext = () => {
+    const handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        setInputTextColour('var(--foreground)')
         resetPiece()
         resetLetters()
         setState(State.Guessing)
+        aRef.current?.focus()
+    }
+
+    const handleKeyDown = (
+        event: React.KeyboardEvent<HTMLInputElement>,
+        nextInputRef: React.RefObject<HTMLInputElement | HTMLButtonElement>
+    ) => {
+        if (event.key === 'Enter' && nextInputRef.current) {
+            event.preventDefault() // Prevent form submission on Enter
+            nextInputRef.current.focus() // Focus on the next input field
+        }
     }
 
     const resetLetters = () => {
@@ -130,23 +166,13 @@ export default function Play(props: {
 
     return (
         <Card className="flex flex-col w-full p-3 bg-card relative h-full">
-            {state === State.Correct && (
-                <h1 className="absolute bg-green-400 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-                    Correct
-                </h1>
-            )}
-            {state === State.Incorrect && (
-                <h1 className="absolute bg-red-400 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-                    Inorrect
-                </h1>
-            )}
             {/* Top */}
             <div className="flex justify-between items-center">
                 <div className="flex gap-1.5 items-center">
                     <Cube01 className="text-foreground w-4 h-4" />
-                    <h4 className="">Enter the Letters</h4>
+                    <h4>Enter the Letters</h4>
                 </div>
-                <p className="">
+                <p>
                     Current piece:{' '}
                     <span className="text-foreground font-medium">
                         {titleCase(piece.type)}
@@ -157,71 +183,100 @@ export default function Play(props: {
             <div className="flex items-center justify-center flex-1 max-w-full">
                 <Piece type={piece.type} colours={pieceColours} />
             </div>
-            {/* Inputs */}
-            <div className="flex flex-col p-3 pt-0 gap-3">
+            <form
+                onSubmit={(e) => handleSubmit(e)}
+                className="flex flex-col p-3 pt-0 gap-3"
+            >
+                {/* Inputs */}
                 <div className="flex gap-[20px]">
                     {/* A */}
                     <Input
+                        ref={aRef}
+                        onKeyDown={(e) => handleKeyDown(e, bRef)}
                         value={a}
-                        pattern="[a-z]{1,1}"
-                        onChange={(e) => setA(e.target.value)}
-                        className={`text-center text-2xl p-3 h-fit bg-background border-foreground`}
+                        onChange={(e) => setA(e.target.value.slice(0, 1))}
+                        style={
+                            {
+                                '--ring-colour': pieceColours[0],
+                                '--text-colour': inputTextColour,
+                            } as React.CSSProperties
+                        }
+                        className={`!text-[var(--text-colour)] text-center text-2xl p-3 h-fit bg-background !border-[var(--text-colour)] focus:outline-none focus:!ring-2 !ring-[var(--ring-colour)] ring-offset-background focus:ring-offset-2`}
                     />
                     {/* B */}
                     <Input
+                        ref={bRef}
+                        onKeyDown={(e) =>
+                            handleKeyDown(
+                                e,
+                                piece.type === 'corner' ? cRef : submitRef
+                            )
+                        }
                         value={b}
-                        onChange={(e) => setB(e.target.value)}
-                        className="text-center text-2xl p-3 h-fit bg-background border-foreground"
+                        onChange={(e) => setB(e.target.value.slice(0, 1))}
+                        style={
+                            {
+                                '--ring-colour': pieceColours[1],
+                                '--text-colour': inputTextColour,
+                            } as React.CSSProperties
+                        }
+                        className={`!text-[var(--text-colour)] text-center text-2xl p-3 h-fit bg-background !border-[var(--text-colour)] focus:outline-none focus:!ring-2 !ring-[var(--ring-colour)] ring-offset-background focus:ring-offset-2`}
                     />
                     {/* C */}
                     {piece.type == 'corner' && (
                         <Input
+                            ref={cRef}
+                            onKeyDown={(e) => handleKeyDown(e, submitRef)}
                             value={c}
-                            onChange={(e) => setC(e.target.value)}
-                            className="text-center text-2xl p-3 h-fit bg-background border-foreground"
+                            onChange={(e) => setC(e.target.value.slice(0, 1))}
+                            style={
+                                {
+                                    '--ring-colour': pieceColours[2],
+                                    '--text-colour': inputTextColour,
+                                } as React.CSSProperties
+                            }
+                            className={`!text-[var(--text-colour)] text-center text-2xl p-3 h-fit bg-background !border-[var(--text-colour)] focus:outline-none focus:!ring-2 !ring-[var(--ring-colour)] ring-offset-background focus:ring-offset-2`}
                         />
                     )}
                 </div>
-                <form>
-                    {state === State.Guessing && (
-                        <div className="flex gap-[20px]">
-                            <Button
-                                onClick={handleReveal}
-                                variant="destructive"
-                                className="w-full text-md py-3 h-fit text-center align-middle gap-1.5 border-memoRed border-[1px] "
-                            >
-                                Reveal
-                                <Eye className="text-foreground w-4 h-4" />
-                            </Button>
-                            <Button
-                                onClick={handleSubmit}
-                                className="w-full text-md py-3 h-fit"
-                            >
-                                Submit
-                            </Button>
-                        </div>
-                    )}
-                    {state != State.Guessing && (
-                        <div className="flex gap-[20px]">
-                            <Button
-                                onClick={handleTryAgain}
-                                variant="outline"
-                                className="w-full text-md py-3 h-fit text-center align-middle gap-1.5"
-                            >
-                                Try Again
-                                <RefreshCw01 className="text-foreground w-4 h-4" />
-                            </Button>
-                            <Button
-                                onClick={handleNext}
-                                className="w-full text-md py-3 h-fit text-center align-middle gap-1.5"
-                            >
-                                Next
-                                <ArrowRight className="text-background w-4 h-4" />
-                            </Button>
-                        </div>
-                    )}
-                </form>
-            </div>
+                {state === State.Guessing ? (
+                    <div className="flex gap-[20px]">
+                        <Button
+                            onClick={handleReveal}
+                            variant="destructive"
+                            className="w-full text-md py-3 h-fit text-center align-middle gap-1.5 border-memoRed border-[1px]"
+                        >
+                            Reveal
+                            <Eye className="text-foreground w-4 h-4" />
+                        </Button>
+                        <Button
+                            type="submit"
+                            ref={submitRef}
+                            className="w-full text-md py-3 h-fit focus:!ring-2 ring-offset-background focus:ring-offset-2"
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                ) : (
+                    <div className="flex gap-[20px]">
+                        <Button
+                            onClick={handleTryAgain}
+                            variant="outline"
+                            className="w-full text-md py-3 h-fit text-center align-middle gap-1.5"
+                        >
+                            Try Again
+                            <RefreshCw01 className="text-foreground w-4 h-4" />
+                        </Button>
+                        <Button
+                            onClick={handleNext}
+                            className="w-full text-md py-3 h-fit text-center align-middle gap-1.5 focus:!ring-2 ring-offset-background focus:ring-offset-2"
+                        >
+                            Next
+                            <ArrowRight className="text-background w-4 h-4" />
+                        </Button>
+                    </div>
+                )}
+            </form>
             {/* Buttons */}
         </Card>
     )

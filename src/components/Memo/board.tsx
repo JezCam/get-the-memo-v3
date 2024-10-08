@@ -14,8 +14,10 @@ export enum Selection {
 
 export default function Board() {
     const [selection, setSelection] = useState<Selection>(Selection.Both)
+    const [colours, setColours] = useState<string[]>(defaultColours)
+    const [letters, setLetters] = useState<string[]>(defaultLetters)
 
-    const handleSelection = (selection: string) => {
+    const handleUpdateSelection = (selection: string) => {
         switch (selection) {
             case 'corners':
                 setSelection(Selection.Corners)
@@ -27,6 +29,14 @@ export default function Board() {
                 setSelection(Selection.Both)
                 break
         }
+    }
+
+    const handleUpdateLetters = (letters: string[]) => {
+        setLetters(letters)
+    }
+
+    const handleUpdateColours = (colours: string[]) => {
+        setColours(colours)
     }
 
     return (
@@ -49,9 +59,14 @@ export default function Board() {
                 </div>
                 <div className="col-span-2">
                     <Configure
-                        onChange={(selection: string) =>
-                            handleSelection(selection)
-                        }
+                        onUpdateSelection={handleUpdateSelection}
+                        selection={selection}
+                        onUpdateLetters={handleUpdateLetters}
+                        letters={letters}
+                        onUpdateColours={handleUpdateColours}
+                        colours={colours}
+                        onResetLetters={() => setLetters(defaultLetters)}
+                        onResetColours={() => setColours(defaultColours)}
                     />
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
     darkMode: ['class'],
@@ -73,6 +74,20 @@ const config: Config = {
             },
         },
     },
-    plugins: [require('tailwindcss-animate')],
+    plugins: [
+        require('tailwindcss-animate'),
+        plugin(function ({ addBase, theme }) {
+            addBase({
+                ':root': {
+                    '--memoRed': theme('colors.memoRed'), // Expose primary color as a variable
+                    '--memoOrange': theme('colors.memoOrange'),
+                    '--memoYellow': theme('colors.memoYellow'),
+                    '--memoGreen': theme('colors.memoGreen'), // You can expose other colors
+                    '--memoBlue': theme('colors.memoBlue'),
+                    '--foreground': theme('colors.foreground'),
+                },
+            })
+        }),
+    ],
 }
 export default config
