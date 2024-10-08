@@ -52,8 +52,8 @@ export default function Board() {
             <div className="row-span-8 grid grid-cols-5 gap-6 h-full">
                 <div className="col-span-3">
                     <Play
-                        colours={defaultColours}
-                        letters={defaultLetters}
+                        colours={colours}
+                        letters={letters}
                         selection={selection}
                     />
                 </div>

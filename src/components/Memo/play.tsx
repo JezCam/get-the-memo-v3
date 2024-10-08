@@ -170,6 +170,14 @@ export default function Play(props: {
         resetPiece()
     }, [props.selection])
 
+    useEffect(() => {
+        setLetters(props.letters)
+        const _pieceLetters = piece.stickers.map(
+            (sticker) => props.letters[sticker.letter]
+        )
+        setPieceLetters(_pieceLetters)
+    }, [props.letters])
+
     return (
         <Card className="flex flex-col w-full p-3 bg-card relative h-full">
             {/* Top */}
