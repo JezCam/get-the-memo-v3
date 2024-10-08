@@ -12,7 +12,13 @@ import {
 } from '@/lib/definitions'
 import { getRandom, randomRotate, titleCase } from '@/lib/utils'
 import { Card } from '../ui/card'
-import { Eye, Cube01, ArrowRight, RefreshCw01 } from '@untitled-ui/icons-react'
+import {
+    Eye,
+    Cube01,
+    ArrowRight,
+    RefreshCw01,
+    CornerDownLeft,
+} from '@untitled-ui/icons-react'
 import { Input } from '../ui/input'
 import { useTheme } from 'next-themes'
 import { Button } from '../ui/button'
@@ -244,17 +250,18 @@ export default function Play(props: {
                         <Button
                             onClick={handleReveal}
                             variant="destructive"
-                            className="w-full text-md py-3 h-fit text-center align-middle gap-1.5 border-memoRed border-[1px]"
+                            className="w-full text-md py-3 h-fit text-center text-primary align-middle gap-1.5 border-memoRed border-[1px]"
                         >
                             Reveal
-                            <Eye className="text-foreground w-4 h-4" />
+                            <Eye className="text-primary w-4 h-4" />
                         </Button>
                         <Button
                             type="submit"
                             ref={submitRef}
-                            className="w-full text-md py-3 h-fit focus:!ring-2 ring-offset-background focus:ring-offset-2"
+                            className="w-full text-md py-3 h-fit focus:!ring-2 ring-offset-background gap-1.5 focus:ring-offset-2"
                         >
                             Submit
+                            <CornerDownLeft className="text-background w-4 h-4" />
                         </Button>
                     </div>
                 ) : (
