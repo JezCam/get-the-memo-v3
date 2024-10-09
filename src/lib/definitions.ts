@@ -8,6 +8,12 @@ export type PieceType = {
     stickers: StickerType[]
 }
 
+export enum Selection {
+    Corners,
+    Edges,
+    Both,
+}
+
 export const placeholderCornerPiece = {
     type: 'corner',
     stickers: [

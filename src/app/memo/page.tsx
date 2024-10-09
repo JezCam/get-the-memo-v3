@@ -8,11 +8,7 @@ import Configure from '../../components/Memo/configure'
 import TimeChallenges from '../../components/Memo/time-challenges'
 import Stats from '../../components/Memo/stats'
 
-export enum Selection {
-    Corners,
-    Edges,
-    Both,
-}
+import { Selection } from '../../lib/definitions'
 
 export default function Board() {
     const [selection, setSelection] = useState<Selection>(Selection.Both)

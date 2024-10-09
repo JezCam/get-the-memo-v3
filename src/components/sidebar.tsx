@@ -39,7 +39,7 @@ export default function Sidebar() {
                             }
                             fill
                             alt="logo"
-                            objectFit={'contain'}
+                            className="object-contain"
                         />
                     </Link>
                 </div>

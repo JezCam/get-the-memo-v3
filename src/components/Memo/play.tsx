@@ -16,9 +16,7 @@ import {
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 
-import { Selection } from '../../app/memo/page'
-
-import { placeholderCornerPiece, placeholderEdgePiece } from '@/lib/definitions'
+import { Selection } from '@/lib/definitions'
 
 enum State {
     Guessing,

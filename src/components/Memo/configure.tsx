@@ -6,7 +6,7 @@ import { Label } from '../ui/label'
 import MemoLink from '../ui/memo-link'
 import { Input } from '../ui/input'
 
-import { Selection } from '../../app/memo/page'
+import { Selection } from '@/lib/definitions'
 
 export default function Configure(props: {
     onUpdateSelection: (selection: string) => void
