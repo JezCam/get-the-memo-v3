@@ -35,10 +35,10 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <div className="flex flex-row w-screen h-screen max-h-screen p-6 gap-6 bg-gradient-to-b from-[#FFFFFF] to-[#F4F4F5] dark:from-[#09090B] dark:to-[#040405]">
-                        <div className="w-[10%] h-full">
+                        <div className="w-[12.5%] h-full">
                             <Sidebar />
                         </div>
-                        <div className="w-[70%]">{children}</div>
+                        <div className="w-[67.5%]">{children}</div>
                         <div className="w-[20%] h-full grid grid-rows-10 gap-3">
                             <div className="row-span-2 flex flex-col justify-between pb-3">
                                 <div className="flex justify-between">

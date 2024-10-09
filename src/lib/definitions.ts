@@ -8,6 +8,22 @@ export type PieceType = {
     stickers: StickerType[]
 }
 
+export const placeholderCornerPiece = {
+    type: 'corner',
+    stickers: [
+        { colour: 5, letter: 0 },
+        { colour: 5, letter: 0 },
+        { colour: 5, letter: 0 },
+    ],
+}
+export const placeholderEdgePiece = {
+    type: 'edge',
+    stickers: [
+        { colour: 5, letter: 0 },
+        { colour: 5, letter: 0 },
+    ],
+}
+
 export const corners: PieceType[] = [
     {
         // Red, Blue, Yellow
