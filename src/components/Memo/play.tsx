@@ -17,10 +17,11 @@ import { Input } from '../ui/input'
 import { useTheme } from 'next-themes'
 import { Button } from '../ui/button'
 
-import { Selection } from './board'
+import { Selection } from '../../app/memo/page'
 
 enum State {
     Guessing,
+    TryingAgain,
     Revealed,
     Correct,
     Incorrect,
@@ -30,8 +31,9 @@ export default function Play(props: {
     colours: string[]
     letters: string[]
     selection: Selection
+    onCorrect: () => void
+    onIncorrect: () => void
 }) {
-    const { resolvedTheme } = useTheme()
     const [state, setState] = useState<State>(State.Guessing)
     const [piece, setPiece] = useState<PieceType>()
     const [pieceLetters, setPieceLetters] = useState<string[]>([])
@@ -72,6 +74,7 @@ export default function Play(props: {
 
     const handleReveal = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        state != State.TryingAgain && props.onIncorrect()
         setLettersIncorrect()
     }
 
@@ -83,20 +86,27 @@ export default function Play(props: {
                     JSON.stringify([a, b, c].map((l) => l.toUpperCase())) ===
                     JSON.stringify(pieceLetters)
                 ) {
-                    setState(State.Correct)
+                    state != State.TryingAgain && props.onCorrect()
                     setInputTextColour('var(--memoGreen)')
+                    setState(State.Correct)
                 } else {
-                    setState(State.Incorrect)
+                    state != State.TryingAgain && props.onIncorrect()
                     setLettersIncorrect()
+                    setState(State.Incorrect)
                 }
                 break
             case 'edge':
-                if (JSON.stringify([a, b]) === JSON.stringify(pieceLetters)) {
-                    setState(State.Correct)
+                if (
+                    JSON.stringify([a, b].map((l) => l.toUpperCase())) ===
+                    JSON.stringify(pieceLetters)
+                ) {
+                    state != State.TryingAgain && props.onCorrect()
                     setInputTextColour('var(--memoGreen)')
+                    setState(State.Correct)
                 } else {
-                    setState(State.Incorrect)
+                    state != State.TryingAgain && props.onIncorrect()
                     setLettersIncorrect()
+                    setState(State.Incorrect)
                 }
                 break
         }
@@ -105,7 +115,7 @@ export default function Play(props: {
     const handleTryAgain = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         setInputTextColour('var(--foreground)')
-        setState(State.Guessing)
+        setState(State.TryingAgain)
         resetLetters()
         aRef.current?.focus()
     }
@@ -212,6 +222,7 @@ export default function Play(props: {
                     <div className="flex gap-[20px]">
                         {/* A */}
                         <Input
+                            disabled={state === State.Revealed}
                             ref={aRef}
                             onKeyDown={(e) => handleKeyDown(e, bRef)}
                             value={a}
@@ -226,6 +237,7 @@ export default function Play(props: {
                         />
                         {/* B */}
                         <Input
+                            disabled={state === State.Revealed}
                             ref={bRef}
                             onKeyDown={(e) =>
                                 handleKeyDown(
@@ -246,6 +258,7 @@ export default function Play(props: {
                         {/* C */}
                         {piece.type == 'corner' && (
                             <Input
+                                disabled={state === State.Revealed}
                                 ref={cRef}
                                 onKeyDown={(e) => handleKeyDown(e, submitRef)}
                                 value={c}
@@ -262,7 +275,7 @@ export default function Play(props: {
                             />
                         )}
                     </div>
-                    {state === State.Guessing ? (
+                    {state === State.Guessing || state === State.TryingAgain ? (
                         <div className="flex gap-[20px]">
                             <Button
                                 onClick={handleReveal}

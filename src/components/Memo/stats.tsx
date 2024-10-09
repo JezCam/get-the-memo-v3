@@ -3,7 +3,7 @@ import { Card } from '../ui/card'
 import { BarChart04, Check, X, Target05 } from '@untitled-ui/icons-react'
 import MemoLink from '../ui/memo-link'
 
-export default function Stats() {
+export default function Stats(props: { correct: number; incorrect: number }) {
     return (
         <Card className="flex flex-col w-full h-full p-3 bg-card justify-between">
             <div className="flex justify-between">
@@ -21,7 +21,9 @@ export default function Stats() {
                             <Check className="w-5 h-5 text-memoGreen" />
                         </div>
                         <div className="flex flex-col w-full items-center pb-0.5">
-                            <h3 className="leading-4 pb-1 pt-1.5">24</h3>
+                            <h3 className="leading-4 pb-1 pt-1.5">
+                                {props.correct}
+                            </h3>
                             <p>Correct</p>
                         </div>
                     </div>
@@ -33,7 +35,9 @@ export default function Stats() {
                             <X className="w-5 h-5 text-memoRed" />
                         </div>
                         <div className="flex flex-col w-full items-center pb-0.5">
-                            <h3 className="leading-4 pb-1 pt-1.5">15</h3>
+                            <h3 className="leading-4 pb-1 pt-1.5">
+                                {props.incorrect}
+                            </h3>
                             <p>Incorrect</p>
                         </div>
                     </div>
@@ -45,7 +49,16 @@ export default function Stats() {
                             <Target05 className="w-4 h-4 text-primary" />
                         </div>
                         <div className="flex flex-col w-full items-center pb-0.5">
-                            <h3 className="leading-4 pb-1 pt-1.5">86%</h3>
+                            <h3 className="leading-4 pb-1 pt-1.5">
+                                {props.correct + props.incorrect != 0
+                                    ? (
+                                          (props.correct /
+                                              (props.correct +
+                                                  props.incorrect)) *
+                                          100
+                                      ).toFixed(0) + '%'
+                                    : 'N/A'}
+                            </h3>
                             <p>Correct</p>
                         </div>
                     </div>

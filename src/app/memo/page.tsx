@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+'use client'
+
+import React, { useState } from 'react'
 
 import { defaultColours, defaultLetters } from '../../lib/definitions'
-import Play from './play'
-import Configure from './configure'
-import TimeChallenges from './time-challenges'
-import Stats from './stats'
+import Play from '../../components/Memo/play'
+import Configure from '../../components/Memo/configure'
+import TimeChallenges from '../../components/Memo/time-challenges'
+import Stats from '../../components/Memo/stats'
 
 export enum Selection {
     Corners,
@@ -16,6 +18,8 @@ export default function Board() {
     const [selection, setSelection] = useState<Selection>(Selection.Both)
     const [colours, setColours] = useState<string[]>(defaultColours)
     const [letters, setLetters] = useState<string[]>(defaultLetters)
+    const [correct, setCorrect] = useState<number>(0)
+    const [incorrect, setIncorrect] = useState<number>(0)
 
     const handleUpdateSelection = (selection: string) => {
         switch (selection) {
@@ -39,6 +43,13 @@ export default function Board() {
         setColours(colours)
     }
 
+    const handleCorrect = () => {
+        setCorrect((correct) => correct + 1)
+    }
+    const handleIncorrect = () => {
+        setIncorrect((incorrect) => incorrect + 1)
+    }
+
     return (
         <div className="h-full grid grid-rows-10 gap-3">
             <div className="row-span-2 grid grid-cols-5 gap-6">
@@ -46,7 +57,7 @@ export default function Board() {
                     <TimeChallenges />
                 </div>
                 <div className="col-span-2">
-                    <Stats />
+                    <Stats correct={correct} incorrect={incorrect} />
                 </div>
             </div>
             <div className="row-span-8 grid grid-cols-5 gap-6 h-full">
@@ -55,6 +66,8 @@ export default function Board() {
                         colours={colours}
                         letters={letters}
                         selection={selection}
+                        onCorrect={handleCorrect}
+                        onIncorrect={handleIncorrect}
                     />
                 </div>
                 <div className="col-span-2">
