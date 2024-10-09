@@ -95,9 +95,9 @@ export default function RootLayout({
                                             </div>
                                             <div className="flex flex-col w-full items-center pb-0.5">
                                                 <h3 className="leading-4 pb-1 pt-1.5">
-                                                    24
+                                                    54
                                                 </h3>
-                                                <p>Correct</p>
+                                                <p>Days</p>
                                             </div>
                                         </div>
                                     </div>
@@ -119,9 +119,9 @@ export default function RootLayout({
                                             </div>
                                             <div className="flex flex-col w-full items-center pb-0.5">
                                                 <h3 className="leading-4 pb-1 pt-1.5">
-                                                    24
+                                                    95
                                                 </h3>
-                                                <p>Correct</p>
+                                                <p>Days</p>
                                             </div>
                                         </div>
                                     </div>

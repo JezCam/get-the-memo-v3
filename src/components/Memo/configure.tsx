@@ -104,7 +104,7 @@ export default function Configure(props: {
             <div className="flex flex-col gap-3 h-full">
                 <div className="flex justify-between">
                     <p className="font-bold">Colour and Letter Scheme</p>
-                    <MemoLink text="View Trending Colours" href="" />
+                    <MemoLink text="View Trending Colours" href="/colours" />
                 </div>
                 <div className="flex bg-primary/10 rounded-sm p-3 gap-3 h-fit">
                     {[0, 0, 0, 0, 0, 0].map((_, index) => (

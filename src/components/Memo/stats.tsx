@@ -11,7 +11,7 @@ export default function Stats(props: { correct: number; incorrect: number }) {
                     <BarChart04 className="text-foreground w-4 h-4" />
                     <h4>Today's Stats</h4>
                 </div>
-                <MemoLink href="" text="View All-Time Stats" />
+                <MemoLink href="/stats" text="View All-Time Stats" />
             </div>
             <div className="grid grid-cols-3 gap-3 h-min w-full">
                 <div className="flex flex-col gap-3 w-full">

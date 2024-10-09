@@ -23,12 +23,12 @@ export default function Leaderboard() {
         <Card className="flex flex-col w-full h-full p-3 bg-card gap-6">
             {/* Top */}
             <div className="flex justify-between items-start">
-                <div className="flex gap-1.5 items-center">
+                <div className="flex gap-1.5 items-center w-[55%]">
                     <Trophy01 className="text-foreground w-4 h-4" />
                     <h4>Global Top 10 </h4>
                 </div>
                 <Select defaultValue="daily">
-                    <SelectTrigger className="w-[180px]">
+                    <SelectTrigger className="w-[45%]">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -61,7 +61,7 @@ export default function Leaderboard() {
                                 <div className="text-2xl font-semibold">1</div>
                             </div>
                             <div className="flex gap-3">
-                                <Avatar className="border-[1px] border-white">
+                                <Avatar className="border-[2px] border-white">
                                     <AvatarImage
                                         src="https://github.com/shadcn.png"
                                         alt="@shadcn"
@@ -177,7 +177,7 @@ export default function Leaderboard() {
                         </div>
                     ))}
                 </div>
-                <MemoLink href="" text="View Full Leaderboard" />
+                <MemoLink href="/leaderboard" text="View Full Leaderboard" />
             </div>
         </Card>
     )
