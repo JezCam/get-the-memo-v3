@@ -26,6 +26,14 @@ export default function Configure(props: {
 
     const letterRemap: number[] = [0, 1, 2, 7, -1, 3, 6, 5, 4]
     const colourRemap: number[] = [3, 1, 5, 2, 4, 0]
+    const bordersRemap: number[][] = [
+        [5, 2, 4, 3],
+        [5, 2, 3, 4],
+        [3, 4, 0, 1],
+        [5, 2, 0, 1],
+        [5, 2, 1, 0],
+        [4, 3, 0, 1],
+    ]
 
     const changeColour = (index: number) => {
         setColour(index)
@@ -111,8 +119,43 @@ export default function Configure(props: {
                         <RefreshCw01 className="w-4 h-4 text-primary" />
                     </div>
                 </div>
-                <div className="flex bg-primary/10 rounded-sm p-3 gap-3 h-full">
-                    {/* Row */}
+                <div className="flex bg-primary/10 rounded-sm p-8 gap-3 h-full relative">
+                    <div className="absolute top-3 left-0 w-full px-8 h-2">
+                        <div
+                            style={{
+                                backgroundColor:
+                                    colours[bordersRemap[colour][0]],
+                            }}
+                            className="rounded-full w-full h-full"
+                        ></div>
+                    </div>
+                    <div className="absolute bottom-3 left-0 w-full px-8 h-2">
+                        <div
+                            style={{
+                                backgroundColor:
+                                    colours[bordersRemap[colour][1]],
+                            }}
+                            className="rounded-full w-full h-full"
+                        ></div>
+                    </div>
+                    <div className="absolute top-0 right-3 h-full py-8 w-2">
+                        <div
+                            style={{
+                                backgroundColor:
+                                    colours[bordersRemap[colour][2]],
+                            }}
+                            className="rounded-full w-full h-full"
+                        ></div>
+                    </div>
+                    <div className="absolute top-0 left-3 h-full py-8 w-2">
+                        <div
+                            style={{
+                                backgroundColor:
+                                    colours[bordersRemap[colour][3]],
+                            }}
+                            className="rounded-full w-full h-full"
+                        ></div>
+                    </div>
                     <div className="grid grid-cols-3 gap-3 w-full h-full">
                         {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, index) =>
                             index != 4 ? (
