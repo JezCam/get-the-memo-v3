@@ -69,9 +69,7 @@ export default function Leaderboard() {
                                     <AvatarFallback>JC</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <h4 className="font-semibold">
-                                        Jeremy Cameron
-                                    </h4>
+                                    <h4>Jeremy Cameron</h4>
                                     <p className="mt-0">2014CAME01</p>
                                 </div>
                             </div>
@@ -98,9 +96,7 @@ export default function Leaderboard() {
                                     <AvatarFallback>JC</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <h4 className="font-semibold">
-                                        Jeremy Cameron
-                                    </h4>
+                                    <h4>Jeremy Cameron</h4>
                                     <p className="mt-0">2014CAME01</p>
                                 </div>
                             </div>
@@ -129,9 +125,7 @@ export default function Leaderboard() {
                                     <AvatarFallback>JC</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <h4 className="font-semibold">
-                                        Jeremy Cameron
-                                    </h4>
+                                    <h4>Jeremy Cameron</h4>
                                     <p className="mt-0">2014CAME01</p>
                                 </div>
                             </div>
@@ -161,15 +155,13 @@ export default function Leaderboard() {
                                         <AvatarFallback>JC</AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <h4 className="font-semibold">
-                                            Jeremy Cameron
-                                        </h4>
+                                        <h4>Jeremy Cameron</h4>
                                         <p className="mt-0">2014CAME01</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col w-fit items-center pb-0.5">
-                                <h3 className="leading-4 pb-1 pt-1.5 font-bold text-xl">
+                                <h3 className="leading-4 pb-1 pt-1.5 text-xl">
                                     54
                                 </h3>
                                 <p>Days</p>

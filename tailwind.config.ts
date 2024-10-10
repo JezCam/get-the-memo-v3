@@ -84,8 +84,6 @@ const config: Config = {
                     '--memoYellow': theme('colors.memoYellow'),
                     '--memoGreen': theme('colors.memoGreen'), // You can expose other colors
                     '--memoBlue': theme('colors.memoBlue'),
-                    '--foreground': theme('colors.foreground'),
-                    '--background': theme('colors.background'),
                 },
             })
         }),
