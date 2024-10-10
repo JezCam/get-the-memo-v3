@@ -16,7 +16,7 @@ export default function Stats(props: { correct: number; incorrect: number }) {
             <div className="grid grid-cols-3 gap-3 h-min w-full">
                 <div className="flex flex-col gap-3 w-full">
                     <p className="font-bold">Correct Memo</p>
-                    <div className="flex bg-primary/10 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
+                    <div className="flex bg-primary/10 border-2 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
                         <div className="bg-memoGreen/10 flex items-center justify-center h-full aspect-square w-auto rounded-sm">
                             <Check className="w-5 h-5 text-memoGreen" />
                         </div>
@@ -30,7 +30,7 @@ export default function Stats(props: { correct: number; incorrect: number }) {
                 </div>
                 <div className="flex flex-col gap-3 w-full">
                     <p className="font-bold">Incorrect Memo</p>
-                    <div className="flex bg-primary/10 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full justify-between">
+                    <div className="flex bg-primary/10 border-2 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full justify-between">
                         <div className="bg-memoRed/10 flex items-center justify-center h-full aspect-square w-auto rounded-sm">
                             <X className="w-5 h-5 text-memoRed" />
                         </div>
@@ -44,7 +44,7 @@ export default function Stats(props: { correct: number; incorrect: number }) {
                 </div>
                 <div className="flex flex-col gap-3 w-full">
                     <p className="font-bold">Accuracy</p>
-                    <div className="flex bg-primary/10 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
+                    <div className="flex bg-primary/10 border-2 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
                         <div className="bg-primary/10 flex items-center justify-center h-full aspect-square w-auto rounded-sm">
                             <Target05 className="w-4 h-4 text-primary" />
                         </div>

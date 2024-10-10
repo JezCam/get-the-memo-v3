@@ -89,7 +89,7 @@ export default function RootLayout({
                                         <p className="font-bold">
                                             Current Streak
                                         </p>
-                                        <div className="flex bg-primary/10 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
+                                        <div className="flex bg-primary/10 border-2 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
                                             <div className="bg-memoYellow/10 flex items-center justify-center h-full aspect-square w-auto rounded-sm">
                                                 <Lightning02 className="w-5 h-5 text-memoYellow" />
                                             </div>
@@ -113,7 +113,7 @@ export default function RootLayout({
                                                 </span>
                                             </p>
                                         </div>
-                                        <div className="flex bg-primary/10 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
+                                        <div className="flex bg-primary/10 border-2 rounded-sm p-1.5 pr-3 gap-1.5 w-full h-full">
                                             <div className="bg-memoOrange/10 flex items-center justify-center h-full aspect-square w-auto rounded-sm">
                                                 <Trophy01 className="w-5 h-5 text-memoOrange" />
                                             </div>
